@@ -1,0 +1,83 @@
+﻿<Window x:Class="Import.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Import"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Search" Margin="10"/>
+                <TextBox x:Name="Search_TB" TextWrapping="Wrap" TextChanged="Search_TB_TextChanged" Height="22" Width="150"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                <Button x:Name="PreviousPage_BTN" Content="Previous" Margin="5" Click="PreviousPage_BTN_Click" Height="22"  Width="70"/>
+                <TextBox x:Name="PageNumber_TB" TextWrapping="Wrap" Text="1" TextAlignment="Center" PreviewTextInput="PageNumber_TB_PreviewTextInput"  Width="50" Height="20" />
+                <Button x:Name="NextPage_BTN" Content="Next" Margin="5" Click="NextPage_BTN_Click" Height="22"  Width="70"/>
+            </StackPanel>
+            
+            <ComboBox Grid.Column="1" x:Name="Filter_CB" Height="22" SelectedIndex="0" Width="120" Margin="5">
+                <ComboBoxItem Content="ProductID"/>
+                <ComboBoxItem Content="Name"/>
+                <ComboBoxItem Content="Article"/>
+                <ComboBoxItem Content="MinAgentPrice"/>
+                <ComboBoxItem Content="ProductType"/>
+                <ComboBoxItem Content="PeopleAmount"/>
+                <ComboBoxItem Content="WorkshopNumber"/>
+            </ComboBox>
+
+            <ComboBox Grid.Column="1" Grid.Row="1" x:Name="TypeFilter_CB" Width="120" Height="22" SelectedIndex="0" Margin="5">
+                <ComboBoxItem Content="Все типы"/>
+                <ComboBoxItem Content="Один слой"/>
+                <ComboBoxItem Content="Два слоя"/>
+                <ComboBoxItem Content="Три слоя"/>
+                <ComboBoxItem Content="Детская"/>
+                <ComboBoxItem Content="Супер мягкая"/>
+            </ComboBox>
+
+            <CheckBox Grid.Column="2" Grid.Row="1" Margin="5" x:Name="SortDirection_CB" Content="Ascending" Click="SortDirection_CB_Click" Height="15" IsChecked="True" Width="75"/>
+            <Button Grid.Column="2" x:Name="Change_Btn" Margin="5" Height="22" Content="Change" IsEnabled="False" Click="Change_Btn_Click"/>
+            
+            
+            
+        </Grid>
+
+        <ListView x:Name="Product_ListView" d:ItemsSource="{d:SampleData ItemCount=5}" MouseLeftButtonUp="Product_ListView_MouseLeftButtonUp" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ProductID" DisplayMemberBinding="{Binding Product_ID}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Article" DisplayMemberBinding="{Binding Article}"/>
+                    <GridViewColumn Header="MinAgentPrice" DisplayMemberBinding="{Binding Min_Agent_Price}"/>
+                    <GridViewColumn Header="ProductType" DisplayMemberBinding="{Binding Product_Type.Name}"/>
+                    <GridViewColumn Header="PeopleAmount" DisplayMemberBinding="{Binding People_Amount}"/>
+                    <GridViewColumn Header="WorkshopNumber" DisplayMemberBinding="{Binding Workshop_Number}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        
+    </Grid>
+</Window>
